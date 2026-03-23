@@ -19,3 +19,5 @@ Faire du scroll ( l'écran suit le joueur )
 Coder les PV et les attaques
 Coder les collisions
 Faire une ambiance sonore ( musique, bruitages )
+
+Code pour installer la bibliothèque : python3 -m pip install -U pygame --user
