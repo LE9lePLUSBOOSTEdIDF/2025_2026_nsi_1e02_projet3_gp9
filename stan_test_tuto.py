@@ -39,3 +39,5 @@ while game_running:
         
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
+
+#Episode 2 : 25:00
