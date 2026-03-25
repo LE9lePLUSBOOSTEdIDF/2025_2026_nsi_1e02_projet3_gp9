@@ -1,5 +1,5 @@
 import pygame
-from game import *
+from game import Game
 
 pygame.init() # Charger tous les modules de la bibliothèque
 
@@ -17,7 +17,13 @@ game_running = True # Création de la boucle pour faire tourner le jeu en contin
 while game_running:
 
     main_screen.blit(background, (0, 0)) # Affichage l'arrière plan à l'écran
-    main_screen.blit(game.player.image, game.player.rect) # Affichage du sprite joueur
+    main_screen.blit(game.player.image, game.player.rect) # Affichage du sprite 
+    
+    if game.pressed.get(pygame.K_d):
+        game.player.move_right()
+
+    elif game.pressed.get(pygame.K_q):
+        game.player.move_left()        
 
     pygame.display.flip() # Actualisation de l'écran
 
@@ -28,4 +34,8 @@ while game_running:
             game_running = False
             pygame.quit()
 
-#Episode 2
+        elif event.type == pygame.KEYDOWN:
+            game.pressed[event.key] = True
+        
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
