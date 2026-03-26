@@ -21,3 +21,8 @@ Coder les collisions
 Faire une ambiance sonore ( musique, bruitages )
 
 Code pour installer la bibliothèque : python3 -m pip install -U pygame --user
+                                        C:\Program Files\Python313\python.exe' -m pip install
+
+Liste tutoriels : https://youtu.be/ARt6DLP38-Y?si=ymgbWpkCtybRC3YX = Faire un arrière-plan infini
+                  https://www.youtube.com/watch?v=JTM8_pcQOUU = Faire un scrolling centré sur le joueur
+                  https://www.youtube.com/watch?v=_HmCa-C5Dio = Codage + Affichage des attaques au corps à corps ( avec animation )

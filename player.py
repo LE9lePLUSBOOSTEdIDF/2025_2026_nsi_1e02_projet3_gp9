@@ -1,4 +1,5 @@
 import pygame
+from projectile import Projectile
 
 class Player(pygame.sprite.Sprite): # Création de la classe joueur
 
@@ -9,10 +10,14 @@ class Player(pygame.sprite.Sprite): # Création de la classe joueur
         self.max_health = 100
         self.attack = 10
         self.velocity = 5
+        self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.transform.scale_by(self.sprite, 0.35)
         self.rect = self.image.get_rect() # Récupération de la position du joueur
         self.rect.x = -50
         self.rect.y = 400
+
+    def throw_projectile(self):
+        self.all_projectiles.add(Projectile())
 
     def move_right(self):
         self.rect.x += self.velocity
