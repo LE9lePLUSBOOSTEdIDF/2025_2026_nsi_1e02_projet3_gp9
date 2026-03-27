@@ -19,7 +19,10 @@ while game_running:
 
     main_screen.blit(background, (0, 0)) # Affichage l'arrière plan à l'écran
     main_screen.blit(game.player.image, game.player.rect) # Affichage du sprite 
-    
+
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+
     game.player.all_projectiles.draw(main_screen)
 
     if game.pressed.get(pygame.K_d) and game.player.rect.x + game.player.rect.width < main_screen.get_width():
@@ -40,8 +43,8 @@ while game_running:
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
 
-            if event.type == pygame.K_SPACE:
-                game.player.throw_projectile()
+            if event.key == pygame.K_SPACE:
+                game.player.launch_projectile()
         
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
