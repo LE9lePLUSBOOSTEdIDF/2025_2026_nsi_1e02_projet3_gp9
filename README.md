@@ -20,6 +20,10 @@ Coder les PV et les attaques
 Coder les collisions
 Faire une ambiance sonore ( musique, bruitages )
 
+Les changements à faire :
+Changer la fonction "forward" des monstres en quelque chose qui suit le joueur précisément
+Le jeu accélère tout seul ?
+
 Code pour installer la bibliothèque : python3 -m pip install -U pygame --user
                                         C:\Program Files\Python313\python.exe' -m pip install
 

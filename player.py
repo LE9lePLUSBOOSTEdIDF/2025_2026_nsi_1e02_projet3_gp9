@@ -3,7 +3,8 @@ from projectile import Projectile
 
 class Player(pygame.sprite.Sprite): # Création de la classe joueur
 
-    def __init__(self):
+    def __init__(self, game):
+        self.game = game
         super().__init__() # Association du joueur avec une image
         self.sprite = pygame.image.load("assets/knight_sprite.png") # Chargement de l'image du joueur
         self.health = 100
@@ -20,7 +21,8 @@ class Player(pygame.sprite.Sprite): # Création de la classe joueur
         self.all_projectiles.add(Projectile(self))
 
     def move_right(self):
-        self.rect.x += self.velocity
+        if not self.game.check_collisions(self, self.game.all_monsters):
+            self.rect.x += self.velocity
 
     def move_left(self):
         self.rect.x -= self.velocity        
