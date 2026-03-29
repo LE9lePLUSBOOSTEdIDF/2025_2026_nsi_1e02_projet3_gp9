@@ -17,6 +17,19 @@ class Player(pygame.sprite.Sprite): # Création de la classe joueur
         self.rect.x = -50
         self.rect.y = 400
 
+    def take_damage(self, damage_amount):
+        self.health -= damage_amount
+
+        if self.health <= 0:
+            pygame.quit()
+
+    def update_health_bar(self, surface):
+        bar_position = [self.rect.x + 50, self.rect.y - 30, self.health, 15]
+        background_bar_position = [self.rect.x + 50, self.rect.y - 30, self.max_health, 15]
+        
+        pygame.draw.rect(surface, (255,255,255), background_bar_position)
+        pygame.draw.rect(surface, (0,255,0), bar_position)
+
     def launch_projectile(self):
         self.all_projectiles.add(Projectile(self))
 

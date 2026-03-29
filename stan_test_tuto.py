@@ -20,11 +20,14 @@ while game_running:
     main_screen.blit(background, (0, 0)) # Affichage l'arrière plan à l'écran
     main_screen.blit(game.player.image, game.player.rect) # Affichage du sprite 
 
+    game.player.update_health_bar(main_screen)
+
     for projectile in game.player.all_projectiles:
         projectile.move()
 
     for monster in game.all_monsters:
         monster.forward()
+        monster.update_health_bar(main_screen)
 
     game.player.all_projectiles.draw(main_screen)
     game.all_monsters.draw(main_screen)
@@ -52,5 +55,3 @@ while game_running:
         
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
-
-#Episode 4

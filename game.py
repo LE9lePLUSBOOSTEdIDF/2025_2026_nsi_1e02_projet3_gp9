@@ -11,6 +11,7 @@ class Game(): # Création d'une classe générale pour le jeu
 
         self.all_monsters = pygame.sprite.Group()
         self.spawn_monster()
+        self.spawn_monster() # Apparition d'un deuxieme monstre
         self.pressed = {}
 
     def check_collisions(self, sprite, sprite_group):
