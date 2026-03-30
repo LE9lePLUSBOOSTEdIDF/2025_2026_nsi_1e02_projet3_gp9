@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite): # Création de la classe joueur
         self.health -= damage_amount
 
         if self.health <= 0:
-            pygame.quit()
+            self.game.game_over()
 
     def update_health_bar(self, surface):
         bar_position = [self.rect.x + 50, self.rect.y - 30, self.health, 15]

@@ -12,31 +12,37 @@ main_screen = pygame.display.set_mode((1080, 720)) # Dimensions de la fenêtre
 background = pygame.image.load("assets/background_castle.png")  # Chargement de l'arrière plan
 background = pygame.transform.scale(background, (1080, 720))
 
+banner = pygame.transform.scale_by(pygame.image.load("assets/goofyahh_banner.png"), 0.4)
+banner_rect = banner.get_rect()
+banner_rect_x = 1080 / 5
+banner_rect_y = 720 / 5
+
+
+play_button = pygame.transform.scale_by(pygame.image.load("assets/play_button.png"), 0.4)
+play_button_rect = play_button.get_rect()
+play_button_rect.x = 1080 / 5
+play_button_rect.y = 1080 / 5 + 200
+
+game_over_banner = pygame.transform.scale_by(pygame.image.load("assets/game_over_banner.png"), 0.4)
+
 game = Game()
 game_running = True # Création de la boucle pour faire tourner le jeu en continu
 
 while game_running:
 
     main_screen.blit(background, (0, 0)) # Affichage l'arrière plan à l'écran
-    main_screen.blit(game.player.image, game.player.rect) # Affichage du sprite 
+    
+    if game.is_running:
+        #main_screen.blit(background, (1080, 720))
+        game.update(main_screen, background)
 
-    game.player.update_health_bar(main_screen)
+    elif game.is_over:
+        main_screen.blit(game_over_banner, (banner_rect_x, banner_rect_y))
+        main_screen.blit(play_button, (play_button_rect.x, play_button_rect.y))
 
-    for projectile in game.player.all_projectiles:
-        projectile.move()
-
-    for monster in game.all_monsters:
-        monster.forward()
-        monster.update_health_bar(main_screen)
-
-    game.player.all_projectiles.draw(main_screen)
-    game.all_monsters.draw(main_screen)
-
-    if game.pressed.get(pygame.K_d) and game.player.rect.x + game.player.rect.width < main_screen.get_width():
-        game.player.move_right()
-
-    elif game.pressed.get(pygame.K_q) and game.player.rect.x > 0:
-        game.player.move_left()        
+    else:
+        main_screen.blit(banner, (banner_rect_x, banner_rect_y))
+        main_screen.blit(play_button, (play_button_rect.x, play_button_rect.y))
 
     pygame.display.flip() # Actualisation de l'écran
 
@@ -55,3 +61,7 @@ while game_running:
         
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if play_button_rect.collidepoint(event.pos):
+                game.start_game()

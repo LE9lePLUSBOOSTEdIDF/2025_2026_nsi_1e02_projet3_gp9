@@ -5,14 +5,49 @@ from monster import Monster
 class Game(): # Création d'une classe générale pour le jeu
     
     def __init__(self):
+        self.is_running = False
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
         self.all_players.add(self.player)
-
         self.all_monsters = pygame.sprite.Group()
+        self.pressed = {}
+        self.is_over = False
+
+    def start_game(self):
+        self.is_running = True
+        self.is_over = False
         self.spawn_monster()
         self.spawn_monster() # Apparition d'un deuxieme monstre
-        self.pressed = {}
+
+    def game_over(self):
+        self.all_monsters = pygame.sprite.Group()
+        self.player.health = self.player.max_health
+        self.player.rect.x = -50
+        self.player.rect.y = 400
+        self.player.all_projectiles = pygame.sprite.Group()
+        self.is_running = False
+        self.is_over = True
+
+    def update(self, screen, background):
+        screen.blit(self.player.image, self.player.rect) # Affichage du sprite 
+        self.player.update_health_bar(screen)
+        screen.blit(background, (1080, 720))
+
+        for projectile in self.player.all_projectiles:
+            projectile.move()
+
+        for monster in self.all_monsters:
+            monster.forward()
+            monster.update_health_bar(screen)
+
+        self.player.all_projectiles.draw(screen)
+        self.all_monsters.draw(screen)
+
+        if self.pressed.get(pygame.K_d) and self.player.rect.x + self.player.rect.width < screen.get_width():
+            self.player.move_right()
+
+        elif self.pressed.get(pygame.K_q) and self.player.rect.x > 0:
+            self.player.move_left()       
 
     def check_collisions(self, sprite, sprite_group):
         return pygame.sprite.spritecollide(sprite, sprite_group, False, pygame.sprite.collide_mask)
