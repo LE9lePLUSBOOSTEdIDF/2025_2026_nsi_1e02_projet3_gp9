@@ -10,19 +10,19 @@ Ennemis : chevaliers squelettes, chef des chevaliers squelettes qui en fait spaw
 
 Partie technique :
 
-Avoir les sprites des Personnages
-Avoir les sprites des attaques
-Avoir les props / images de fond
-Créer une interface graphique
-Faire un menu
+Avoir les props
+Rendre belle l'interface graphique
+Rendre beau le menu
 Faire du scroll ( l'écran suit le joueur )
-Coder les PV et les attaques
-Coder les collisions
+Faire une attaque au corps à corps
+Rajouter un saut
+Rajouter des plateformes
 Faire une ambiance sonore ( musique, bruitages )
 
 Les changements à faire :
 Changer la fonction "forward" des monstres en quelque chose qui suit le joueur précisément
 Le jeu accélère tout seul ?
+Optimiser le jeu car il bug trop rapidement lorsqu'on lance plein de projectiles
 
 Code pour installer la bibliothèque : python3 -m pip install -U pygame --user
                                         C:\Program Files\Python313\python.exe' -m pip install
