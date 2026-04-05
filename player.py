@@ -1,4 +1,5 @@
 import pygame
+import time
 from projectile import Projectile
 
 class Player(pygame.sprite.Sprite): # Création de la classe joueur
@@ -11,6 +12,13 @@ class Player(pygame.sprite.Sprite): # Création de la classe joueur
         self.max_health = 100
         self.attack = 10
         self.velocity = 2
+
+        self.gravity = 1
+        self.jump_height = 20
+        self.jump_possibility = True
+        self.ground_level = 400
+        self.velocity_y = 0
+
         self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.transform.scale_by(self.sprite, 0.35)
         self.rect = self.image.get_rect() # Récupération de la position du joueur
@@ -42,9 +50,6 @@ class Player(pygame.sprite.Sprite): # Création de la classe joueur
         self.rect.x -= self.velocity
 
     def jump(self):
-        ground_level = self.rect.y
-        jump_height = self.rect.y + 20
-        self.rect.y -= self.velocity
-        if self.rect.y >= jump_height:
-            while self.rect.y > ground_level:
-                self.rect.y += self.velocity
+        if self.jump_possibility:
+            self.velocity_y = -self.jump_height
+            self.jump_possibility = False

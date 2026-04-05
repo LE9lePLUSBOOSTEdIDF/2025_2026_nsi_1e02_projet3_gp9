@@ -33,6 +33,14 @@ class Game(): # Création d'une classe générale pour le jeu
         self.player.update_health_bar(screen)
         screen.blit(background, (1080, 720))
 
+        self.player.velocity_y += self.player.gravity
+        self.player.rect.y += self.player.velocity_y
+
+        if self.player.rect.y >= self.player.ground_level:
+            self.player.rect.y = self.player.ground_level
+            self.player.velocity_y = 0
+            self.player.jump_possibility = True
+
         for projectile in self.player.all_projectiles:
             projectile.move()
 
