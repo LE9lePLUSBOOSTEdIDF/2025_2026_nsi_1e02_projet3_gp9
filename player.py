@@ -31,11 +31,20 @@ class Player(pygame.sprite.Sprite): # Création de la classe joueur
         pygame.draw.rect(surface, (0,255,0), bar_position)
 
     def launch_projectile(self):
-        self.all_projectiles.add(Projectile(self))
+        if len(self.all_projectiles) < 5:
+            self.all_projectiles.add(Projectile(self))
 
     def move_right(self):
         if not self.game.check_collisions(self, self.game.all_monsters):
             self.rect.x += self.velocity
 
     def move_left(self):
-        self.rect.x -= self.velocity        
+        self.rect.x -= self.velocity
+
+    def jump(self):
+        ground_level = self.rect.y
+        jump_height = self.rect.y + 20
+        self.rect.y -= self.velocity
+        if self.rect.y >= jump_height:
+            while self.rect.y > ground_level:
+                self.rect.y += self.velocity

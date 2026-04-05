@@ -58,6 +58,9 @@ while game_running:
 
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
+
+            elif event.key == pygame.K_z:
+                game.player.jump()
         
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
