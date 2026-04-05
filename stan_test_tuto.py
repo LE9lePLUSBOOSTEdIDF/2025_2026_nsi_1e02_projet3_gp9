@@ -17,6 +17,10 @@ banner_rect = banner.get_rect()
 banner_rect_x = 1080 / 5
 banner_rect_y = 720 / 5
 
+plateform = pygame.transform.scale(pygame.image.load("assets/plateform.png"), (200, 100))
+plateform_rect = plateform.get_rect()
+plateform_rect_x = 400
+plateform_rect_y = 15
 
 play_button = pygame.transform.scale_by(pygame.image.load("assets/play_button.png"), 0.4)
 play_button_rect = play_button.get_rect()
