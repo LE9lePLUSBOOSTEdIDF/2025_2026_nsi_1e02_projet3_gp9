@@ -20,25 +20,3 @@ while running :
             pygame.quit() 
             print("fermeture du jeu") 
 
-for event in pygame.event.get():
-
-        if event.type == pygame.QUIT:
-
-            game_running = False
-            pygame.quit()
-
-        elif event.type == pygame.KEYDOWN:
-            game.pressed[event.key] = True
-
-            if event.key == pygame.K_SPACE:
-                game.player.launch_projectile()
-
-            elif event.key == pygame.K_z:
-                game.player.jump()
-        
-        elif event.type == pygame.KEYUP:
-            game.pressed[event.key] = False
-
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if play_button_rect.collidepoint(event.pos):
-                game.start_game()
