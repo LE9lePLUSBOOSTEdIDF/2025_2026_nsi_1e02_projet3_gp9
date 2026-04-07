@@ -61,4 +61,6 @@ class Game(): # Création d'une classe générale pour le jeu
         return pygame.sprite.spritecollide(sprite, sprite_group, False, pygame.sprite.collide_mask)
 
     def spawn_monster(self):
-        self.all_monsters.add(Monster(self))
+        monster = Monster(self)
+        self.all_monsters.add(monster)
+        monster.rect.x += self.player.rect.x
