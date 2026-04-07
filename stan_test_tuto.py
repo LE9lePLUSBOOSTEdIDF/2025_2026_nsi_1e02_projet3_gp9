@@ -50,7 +50,7 @@ while game_running:
 
     pygame.display.flip() # Actualisation de l'écran
 
-for event in pygame.event.get():
+    for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
 
