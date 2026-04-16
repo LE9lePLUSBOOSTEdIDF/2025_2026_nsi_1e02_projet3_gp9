@@ -12,10 +12,10 @@ main_screen = pygame.display.set_mode((1080, 720)) # Dimensions de la fenêtre
 background = pygame.image.load("assets/background_castle.png")  # Chargement de l'arrière plan
 background = pygame.transform.scale(background, (1080, 720))
 
-banner = pygame.transform.scale_by(pygame.image.load("assets/goofyahh_banner.png"), 0.4)
+banner = pygame.transform.scale(pygame.image.load("assets/goofyahh_banner.png"), (1080, 720))
 banner_rect = banner.get_rect()
-banner_rect_x = 1080 / 5
-banner_rect_y = 720 / 5
+banner_rect_x = 0
+banner_rect_y = 0
 
 plateform = pygame.transform.scale(pygame.image.load("assets/plateform.png"), (200, 100))
 plateform_rect = plateform.get_rect()
