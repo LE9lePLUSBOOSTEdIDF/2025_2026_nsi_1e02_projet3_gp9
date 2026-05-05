@@ -1,6 +1,7 @@
 import pygame
 from player import Player
 from monster import Monster
+from camera import Camera
 
 class Game(): # Création d'une classe générale pour le jeu
     
@@ -12,6 +13,8 @@ class Game(): # Création d'une classe générale pour le jeu
         self.all_monsters = pygame.sprite.Group()
         self.pressed = {}
         self.is_over = False
+        self.camera = Camera()
+        self.screen = Screen()
 
     def start_game(self):
         self.is_running = True
@@ -28,10 +31,10 @@ class Game(): # Création d'une classe générale pour le jeu
         self.is_running = False
         self.is_over = True
 
-    def update(self, screen, background):
-        screen.blit(self.player.image, self.player.rect) # Affichage du sprite 
-        self.player.update_health_bar(screen)
-        screen.blit(background, (1080, 720))
+    def update(self):
+        self.screen.blit(self.player.image, self.player.rect) # Affichage du sprite 
+        self.player.update_health_bar(self.screen)
+        #screen.blit(background, (1080, 720))
 
         self.player.velocity_y += self.player.gravity
         self.player.rect.y += self.player.velocity_y
@@ -46,15 +49,16 @@ class Game(): # Création d'une classe générale pour le jeu
 
         for monster in self.all_monsters:
             monster.forward()
-            monster.update_health_bar(screen)
+            monster.update_health_bar(self.screen)
 
-        self.player.all_projectiles.draw(screen)
-        self.all_monsters.draw(screen)
+        self.player.all_projectiles.draw(self.screen)
+        self.all_monsters.draw(self.screen)
+        self.camera.update(self.player)
 
-        if self.pressed.get(pygame.K_d) and self.player.rect.x + self.player.rect.width < screen.get_width():
+        if self.pressed.get(pygame.K_d): #and self.player.rect.x + self.player.rect.width < screen.get_width():
             self.player.move_right()
 
-        elif self.pressed.get(pygame.K_q) and self.player.rect.x > 0:
+        elif self.pressed.get(pygame.K_q): #and self.player.rect.x > 0:
             self.player.move_left()       
 
     def check_collisions(self, sprite, sprite_group):
