@@ -3,9 +3,9 @@ import sys
 
 from settings import *
 from player import Player
-from enemy4 import Enemy
-from level6 import Level
-from ui7 import Button
+from enemy import Enemy
+from chat.level import Level
+from chat.ui import Button
 
 class Game:
     def __init__(self):
