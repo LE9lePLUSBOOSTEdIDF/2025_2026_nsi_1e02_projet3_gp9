@@ -2,14 +2,19 @@ import pygame
 
 class Enemy:
     def __init__(self, x, y):
-        self.rect = pygame.Rect(x, y, 50, 50)
+        self.rect = self.image.get_rect(topleft=(x, y))
         self.speed = 2
         self.health = 50
         self.damage = 10
+        self.image = pygame.image.load("assets/monster_skeleton_knight.png").convert_alpha()
+        self.image = pygame.transform.scale(
+        self.image,
+        (70, 70)
+        )
 
     def update(self):
         self.rect.x -= self.speed
-
+        
     def draw(self, screen):
         pygame.draw.rect(screen, (200, 50, 50), self.rect)
 

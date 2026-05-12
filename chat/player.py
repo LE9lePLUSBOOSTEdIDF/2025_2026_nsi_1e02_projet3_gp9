@@ -7,8 +7,10 @@ class Player:
         self.projectiles = []
         self.attack_cooldown = 0
         self.shoot_cooldown = 0
-        self.rect.x = 400
-        self.rect.y = -50
+        self.rect.x += dx
+        self.rect = self.image.get_rect(topleft=(x, y))
+        self.image = pygame.image.load("assets/knight_sprite.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image,(70, 90))
 
     def handle_input(self, keys):
         dx = 0
@@ -21,7 +23,7 @@ class Player:
             dx = PLAYER_SPEED
             self.direction = 1
 
-        self.rect.x += dx
+        
 
     def jump(self):
         if self.on_ground:
