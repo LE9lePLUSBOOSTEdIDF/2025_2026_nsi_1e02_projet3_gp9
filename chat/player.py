@@ -7,6 +7,8 @@ class Player:
         self.projectiles = []
         self.attack_cooldown = 0
         self.shoot_cooldown = 0
+        self.rect.x = 400
+        self.rect.y = -50
 
     def handle_input(self, keys):
         dx = 0
