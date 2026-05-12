@@ -27,6 +27,12 @@ class Game:
 
         self.reset_game()
 
+        self.background = pygame.image.load("assets/background_castle.png").convert()
+        self.background = pygame.transform.scale(
+            self.background,
+            (WIDTH, HEIGHT)
+        )
+
     def reset_game(self):
         self.player = Player(100, 500)
 
@@ -137,7 +143,7 @@ class Game:
         self.screen.blit(hp_text, (20, 20))
 
     def draw(self):
-        self.screen.fill(DARK)
+        self.screen.blit(self.background, (0, 0))
 
         self.level.draw(self.screen)
 

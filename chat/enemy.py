@@ -16,7 +16,7 @@ class Enemy:
         self.rect.x -= self.speed
         
     def draw(self, screen):
-        pygame.draw.rect(screen, (200, 50, 50), self.rect)
+        screen.blit(self.image, self.rect)
 
         pygame.draw.rect(screen, (255, 0, 0),
                          (self.rect.x, self.rect.y - 10, 50, 5))
