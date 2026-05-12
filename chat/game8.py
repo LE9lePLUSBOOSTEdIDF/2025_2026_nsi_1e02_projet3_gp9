@@ -1,4 +1,99 @@
 import pygame
+import sys
+
+from settings import *
+from player import Player
+from enemy4 import Enemy
+from level6 import Level
+from ui7 import Button
+
+class Game:
+    def __init__(self):
+        pygame.init()
+
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_caption(TITLE)
+
+        self.clock = pygame.time.Clock()
+
+        self.running = True
+
+        self.state = "menu"
+
+        self.start_button = Button(500, 300, 300, 80, "JOUER")
+        self.retry_button = Button(500, 300, 300, 80, "REESSAYER")
+
+        self.font = pygame.font.SysFont("Arial", 32)
+
+        self.reset_game()
+
+    def reset_game(self):
+        self.player = Player(100, 500)
+
+        self.enemies = [
+            Enemy(700, 600),
+            Enemy(1000, 600),
+            Enemy(850, 350)
+        ]
+
+        self.level = Level()
+
+    def run(self):
+        while self.running:
+            self.clock.tick(FPS)
+
+            if self.state == "menu":
+                self.menu_events()
+                self.menu_draw()
+
+            elif self.state == "game":
+                self.game_events()
+                self.update()
+                self.draw()
+
+            elif self.state == "dead":
+                self.dead_events()
+                self.dead_draw()
+
+            pygame.display.flip()
+
+        pygame.quit()
+        sys.exit()
+        
+    def menu_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.start_button.is_clicked(event.pos):
+                    self.state = "game"
+
+    def dead_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.retry_button.is_clicked(event.pos):
+                    self.reset_game()
+                    self.state = "game"
+
+    def game_events(self):
+        keys = pygame.key.get_pressed()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.player.jump()
+
+                if event.key == pygame.K_f:
+                    self.player.shoot()
+
+                if event.key == pygame.K_e:
                     attack_rect = self.player.melee_attack()
 
                     if attack_rect:
@@ -7,7 +102,7 @@ import pygame
                                 enemy.health -= 20
 
         self.player.handle_input(keys)
-
+    
     def update(self):
         self.player.update()
 
@@ -51,8 +146,8 @@ import pygame
         for enemy in self.enemies:
             enemy.draw(self.screen)
 
-        self.draw_hud()
-
+        self.draw_hud() 
+    
     def menu_draw(self):
         self.screen.fill((20, 20, 20))
 

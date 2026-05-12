@@ -1,6 +1,10 @@
 import pygame
-        self.projectiles = []
+from settings import *
+from projectile import Projectile
 
+class Player:
+    def __init__(self, x, y):
+        self.projectiles = []
         self.attack_cooldown = 0
         self.shoot_cooldown = 0
 
