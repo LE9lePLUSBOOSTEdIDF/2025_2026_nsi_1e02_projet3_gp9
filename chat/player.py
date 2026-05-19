@@ -5,14 +5,27 @@ from projectile import Projectile
 class Player:
     def __init__(self, x, y):
         self.projectiles = []
+
+        self.attack_damage = 20
         self.attack_cooldown = 0
         self.shoot_cooldown = 0
-        self.rect.x += dx
-        self.rect = self.image.get_rect(topleft=(x, y))
+
+        self.health = 100
+
+        self.vel_y = 0
+        self.on_ground = False
+
+        self.direction = 1
+
         self.image = pygame.image.load("assets/knight_sprite.png").convert_alpha()
-        self.image = pygame.transform.scale(self.image,(70, 90))
+        self.image = pygame.transform.scale_by(self.image, 0.25)
+
+        self.rect = self.image.get_rect(topleft=(x, y))
+        self.pos_x = float(x)
+        self.pos_y = float(y)
 
     def handle_input(self, keys):
+
         dx = 0
 
         if keys[pygame.K_q]:
@@ -23,6 +36,8 @@ class Player:
             dx = PLAYER_SPEED
             self.direction = 1
 
+        self.pos_x += dx
+        self.rect.x = int(self.pos_x)
         
 
     def jump(self):
@@ -81,7 +96,6 @@ class Player:
             projectile.update()
 
     def draw(self, screen):
-        pygame.draw.rect(screen, BLUE, self.rect)
-
+        screen.blit(self.image, self.rect)
         for projectile in self.projectiles:
             projectile.draw(screen)

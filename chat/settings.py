@@ -2,7 +2,7 @@ WIDTH = 1280
 HEIGHT = 720
 FPS = 60
 
-TITLE = "Castle Cave"
+TITLE = "NSI Game"
 
 GRAVITY = 0.8
 PLAYER_SPEED = 5

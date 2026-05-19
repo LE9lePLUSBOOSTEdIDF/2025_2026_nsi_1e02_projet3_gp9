@@ -11,12 +11,22 @@ class Level:
         ]
 
     def handle_collisions(self, player):
+
         player.on_ground = False
 
         for platform in self.platforms:
-            if player.rect.colliderect(platform):
 
-                if player.vel_y > 0:
+            # Le joueur tombe
+            if player.vel_y >= 0:
+
+                # Vérifie si le joueur touche le dessus
+                if (
+                    player.rect.bottom >= platform.top
+                    and player.rect.bottom <= platform.top + 20
+                    and player.rect.right > platform.left
+                    and player.rect.left < platform.right
+                ):
+
                     player.rect.bottom = platform.top
                     player.vel_y = 0
                     player.on_ground = True
