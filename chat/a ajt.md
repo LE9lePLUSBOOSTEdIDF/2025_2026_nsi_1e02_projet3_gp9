@@ -159,4 +159,3 @@ animation d’attaque
 animation de mort
 états (idle, run, jump, attack)
 
-C’est là qu’un projet étudiant commence à ressembler à un vrai jeu indie.
