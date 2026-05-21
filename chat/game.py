@@ -124,12 +124,12 @@ class Game:
             for enemy in self.enemies:
                 if projectile.rect.colliderect(enemy.rect):
                     enemy.health -= projectile.damage
-
-                    if enemy.health == 0:
-                        enemy.remove
+                    enemy.check_health()
 
                     if projectile in self.player.projectiles:
                         self.player.projectiles.remove(projectile)
+
+                    self.enemies = [e for e in self.enemies if e.health > 0]
 
         if self.player.health <= 0:
             self.state = "dead"

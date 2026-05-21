@@ -17,6 +17,7 @@ class Player:
 
         self.direction = 1
 
+        self.initial_image = pygame.transform.scale_by(pygame.image.load("assets/knight_sprite.png").convert_alpha(), 0.25)
         self.image = pygame.image.load("assets/knight_sprite.png").convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 0.25)
 
@@ -38,6 +39,12 @@ class Player:
 
         self.pos_x += dx
         self.rect.x = int(self.pos_x)
+
+        if self.direction == 1:
+            self.image = self.initial_image
+
+        elif self.direction == -1:
+            self.image = pygame.transform.flip(self.initial_image, True, False)
         
 
     def jump(self):

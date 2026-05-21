@@ -1,7 +1,8 @@
 import pygame
 
-class Enemy:
+class Enemy(pygame.sprite.Sprite):
     def __init__(self, x, y):
+        super().__init__()
         self.speed = 2
         self.health = 50
         self.damage = 10
@@ -22,3 +23,7 @@ class Enemy:
 
         pygame.draw.rect(screen, (0, 255, 0),
                          (self.rect.x, self.rect.y - 10, self.health, 5))
+        
+    def check_health(self):
+        if self.health <= 0:
+            self.kill()
