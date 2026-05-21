@@ -37,9 +37,9 @@ class Game:
         self.player = Player(100, 500)
 
         self.enemies = [
-            Enemy(700, 600),
-            Enemy(1000, 600),
-            Enemy(850, 350)
+            Enemy(700, 550),
+            Enemy(1000, 550),
+            Enemy(850, 300)
         ]
 
         self.level = Level()
@@ -120,15 +120,16 @@ class Game:
             if enemy.rect.colliderect(self.player.rect):
                 self.player.health -= 0.1
 
-        for projectile in self.player.projectiles:
+        for projectile in self.player.projectiles[:]:
             for enemy in self.enemies:
                 if projectile.rect.colliderect(enemy.rect):
                     enemy.health -= projectile.damage
+                    enemy.check_health()
 
                     if projectile in self.player.projectiles:
                         self.player.projectiles.remove(projectile)
 
-        self.enemies = [e for e in self.enemies if e.health > 0]
+                    self.enemies = [e for e in self.enemies if e.health > 0]
 
         if self.player.health <= 0:
             self.state = "dead"
